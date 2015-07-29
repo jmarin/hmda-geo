@@ -26,12 +26,14 @@ object PipBuild extends Build {
 
   val akkaDeps = testDeps ++ Seq(akkaHttp)
 
-  val akkaHttpDeps = akkaDeps ++ Seq(akkaHttp, akkaHttpTestkit, akkaHttpJson, logback, scalaLogging)
+  val slickDeps = Seq(slick, slickPG, hikariCP, jts, scale)
+
+  val deps = akkaDeps ++ Seq(akkaHttp, akkaHttpTestkit, akkaHttpJson, logback, scalaLogging) ++ slickDeps
 
   lazy val microservice = Project(
     "microservice-template",
     file("."),
-    settings = buildSettings ++ Revolver.settings ++ Seq(libraryDependencies ++= akkaHttpDeps, resolvers ++= repos)
+    settings = buildSettings ++ Revolver.settings ++ Seq(libraryDependencies ++= deps, resolvers ++= repos)
   )
 
 }
