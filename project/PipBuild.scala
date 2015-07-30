@@ -2,6 +2,7 @@ import sbt._
 import sbt.Keys._
 import com.typesafe.sbt.SbtScalariform._
 import spray.revolver.RevolverPlugin._
+import sbtassembly.AssemblyPlugin.autoImport._
 
 object BuildSettings {
   val buildOrganization = "cfpb"
@@ -9,6 +10,7 @@ object BuildSettings {
   val buildScalaVersion = "2.11.6"
 
   val buildSettings = Defaults.coreDefaultSettings ++
+    Defaults.itSettings ++
     scalariformSettings ++
     Seq(
       organization  := buildOrganization,
@@ -30,10 +32,22 @@ object PipBuild extends Build {
 
   val deps = akkaDeps ++ Seq(akkaHttp, akkaHttpTestkit, akkaHttpJson, logback, scalaLogging) ++ slickDeps
 
-  lazy val microservice = Project(
-    "microservice-template",
-    file("."),
-    settings = buildSettings ++ Revolver.settings ++ Seq(libraryDependencies ++= deps, resolvers ++= repos)
-  )
+  lazy val hmdaPip = (project in file("."))
+    .configs( IntegrationTest )
+    .settings(buildSettings: _*)
+    .settings(
+      Revolver.settings ++
+      Seq(
+        assemblyJarName in assembly := {s"${name.value}"},
+        libraryDependencies ++= deps,
+        resolvers ++= repos
+      )
+    )
+
+//  lazy val microservice = Project(
+//    "hmda-pip",
+//    file("."),
+//    settings = buildSettings ++ Revolver.settings ++ Seq(libraryDependencies ++= deps, resolvers ++= repos)
+//  )
 
 }
