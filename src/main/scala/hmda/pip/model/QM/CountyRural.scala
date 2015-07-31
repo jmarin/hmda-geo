@@ -6,7 +6,7 @@ import hmda.pip.pg.PostgisDriver.api._
 
 case class CountyRuralRow(gid: Long, name: String, geom: Geometry)
 
-class CountyRuralTable(tag: Tag) extends GeometryTable[CountyRuralRow](tag, "county_ru") {
+class CountyRuralTable(tag: Tag) extends GeometryTable[CountyRuralRow](tag, "county_rural") {
 
   def name = column[String]("name")
 

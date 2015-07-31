@@ -17,7 +17,9 @@ import org.slf4j.LoggerFactory
 import com.typesafe.scalalogging.Logger
 import spray.json._
 import hmda.pip.model.Status
+import hmda.pip.model.QM.CountyRuralTable
 import hmda.pip.protocol.PipJsonProtocol
+import geometry.Point
 
 trait Service extends PipJsonProtocol {
   implicit val system: ActorSystem
@@ -45,7 +47,21 @@ trait Service extends PipJsonProtocol {
           }
         }
       }
-    }
+    } ~
+      path("pip" / Segment) { table =>
+        parameters('latitude.as[Double], 'longitude.as[Double]) { (lat, lon) =>
+          encodeResponseWith(NoCoding, Gzip, Deflate) {
+            complete {
+              table match {
+                case "county_rural" =>
+                  val p = Point(lon, lat, 4269)
+                  CountyRuralTable.containsPoint(p.jtsGeometry)
+                case _ => BadRequest
+              }
+            }
+          }
+        }
+      }
 
   }
 
