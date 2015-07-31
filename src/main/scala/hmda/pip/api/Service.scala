@@ -2,24 +2,25 @@ package hmda.pip.api
 
 import java.net.InetAddress
 import java.time.Instant
+
 import akka.actor.ActorSystem
-import com.typesafe.config.Config
-import akka.stream.ActorMaterializer
-import scala.concurrent.ExecutionContextExecutor
 import akka.event.LoggingAdapter
 import akka.http.scaladsl.coding.{ Deflate, Gzip, NoCoding }
-import akka.http.scaladsl.marshalling.ToResponseMarshallable
 import akka.http.scaladsl.marshallers.sprayjson.SprayJsonSupport._
+import akka.http.scaladsl.marshalling.ToResponseMarshallable
 import akka.http.scaladsl.model.StatusCodes._
 import akka.http.scaladsl.server.Directives._
-import akka.http.scaladsl.server.StandardRoute
-import org.slf4j.LoggerFactory
+import akka.stream.ActorMaterializer
+import com.typesafe.config.Config
 import com.typesafe.scalalogging.Logger
-import spray.json._
-import hmda.pip.model.Status
-import hmda.pip.model.QM.CountyRuralTable
-import hmda.pip.protocol.PipJsonProtocol
 import geometry.Point
+import hmda.pip.model.QM.{ BlockRuralTable, CountyRuralTable }
+import hmda.pip.model.Status
+import hmda.pip.protocol.PipJsonProtocol
+import org.slf4j.LoggerFactory
+import spray.json._
+
+import scala.concurrent.ExecutionContextExecutor
 
 trait Service extends PipJsonProtocol {
   implicit val system: ActorSystem
@@ -56,6 +57,9 @@ trait Service extends PipJsonProtocol {
                 case "county_rural" =>
                   val p = Point(lon, lat, 4269)
                   CountyRuralTable.containsPoint(p.jtsGeometry)
+                case "blockdissolve" =>
+                  val p = Point(lon, lat, 4269)
+                  BlockRuralTable.containsPoint(p.jtsGeometry)
                 case _ => BadRequest
               }
             }
