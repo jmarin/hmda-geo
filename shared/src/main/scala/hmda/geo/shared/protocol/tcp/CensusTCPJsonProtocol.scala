@@ -1,6 +1,6 @@
 package hmda.geo.shared.protocol.tcp
 
-import hmda.geo.shared.model.tcp.InputMessages._
+import hmda.geo.shared.model.tcp.InputCensusGeography
 import spray.json.DefaultJsonProtocol
 
 trait CensusTCPJsonProtocol extends DefaultJsonProtocol {

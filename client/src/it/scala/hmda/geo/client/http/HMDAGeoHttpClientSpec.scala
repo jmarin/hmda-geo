@@ -1,11 +1,11 @@
-package hmda.geo.client.api
+package hmda.geo.client.http
 
 import org.scalatest._
 import scala.concurrent.Await
 import scala.concurrent.duration._
 import geometry.Point
 
-class HMDAGeoClientSpec extends FlatSpec with MustMatchers {
+class HMDAGeoHttpClientSpec extends FlatSpec with MustMatchers {
   
   "A request to /status" must "return a status object" in {
     val maybeStatus = Await.result(HMDAGeoHttpClient.status, 2.seconds)
