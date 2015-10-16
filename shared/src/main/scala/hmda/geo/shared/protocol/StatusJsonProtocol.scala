@@ -1,6 +1,6 @@
-package hmda.geo.protocol
+package hmda.geo.shared.protocol
 
-import hmda.geo.model.Status
+import hmda.geo.shared.model.Status
 import spray.json.DefaultJsonProtocol
 
 trait StatusJsonProtocol extends DefaultJsonProtocol {

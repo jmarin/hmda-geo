@@ -1,10 +1,11 @@
-package hmda.geo.protocol
+package hmda.geo.shared
 
 import java.net.InetAddress
 import java.util.Calendar
 import org.scalatest._
+import hmda.geo.shared.model.Status
+import hmda.geo.shared.protocol.StatusJsonProtocol
 import spray.json._
-import hmda.geo.model.Status
 
 class StatusJsonProtocolSpec extends FlatSpec with MustMatchers with StatusJsonProtocol {
 

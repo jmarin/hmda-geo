@@ -1,7 +1,7 @@
 package hmda.geo.model.census
 
 object CensusGeography {
-  sealed trait Geography
+  trait Geography
   case object State extends Geography
   case object County extends Geography
   case object Tract extends Geography

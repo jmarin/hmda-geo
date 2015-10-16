@@ -8,7 +8,7 @@ import geometry.Point
 class HMDAGeoClientSpec extends FlatSpec with MustMatchers {
   
   "A request to /status" must "return a status object" in {
-    val maybeStatus = Await.result(HMDAGeoClient.status, 2.seconds)
+    val maybeStatus = Await.result(HMDAGeoHttpClient.status, 2.seconds)
     maybeStatus match {
       case Right(s) =>
         s.status mustBe "OK"
@@ -20,7 +20,7 @@ class HMDAGeoClientSpec extends FlatSpec with MustMatchers {
 
   "A requet to /tracts" must "find the correct tract by latitude,longitude" in {
     val p = Point(-117, 38)
-    val maybeTract = Await.result(HMDAGeoClient.findTractByPoint(p), 2.seconds)
+    val maybeTract = Await.result(HMDAGeoHttpClient.findTractByPoint(p), 2.seconds)
     maybeTract match {
       case Right(t) =>
         t.intptlon mustBe "-116.6775170"

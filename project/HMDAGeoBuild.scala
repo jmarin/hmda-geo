@@ -47,7 +47,7 @@ object HMDAGeoBuild extends Build {
         libraryDependencies ++= deps,
         resolvers ++= repos
       )
-    )
+    ).dependsOn(shared)
 
   lazy val client = (project in file("client"))
     .configs( IntegrationTest )
@@ -59,6 +59,18 @@ object HMDAGeoBuild extends Build {
         libraryDependencies ++= akkaDeps ++ Seq(akkaHttp, akkaHttpTestkit, akkaHttpJson, logback, scalaLogging, jts, scale),
         resolvers ++= repos
       )  
+    ).dependsOn(shared)
+
+
+  lazy val shared = (project in file("shared"))
+    .configs( IntegrationTest)
+     .settings(buildSettings: _*)
+    .settings(
+      Seq(
+        name := s"hmda-geo${name.value}",
+        assemblyJarName in assembly := "hmda-geo-shared.jar",
+        libraryDependencies ++= Seq(akkaHttpJson, scalaTest)
+      )
     )
   
 

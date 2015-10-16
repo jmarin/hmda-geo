@@ -12,11 +12,11 @@ import akka.http.scaladsl.marshallers.sprayjson.SprayJsonSupport._
 import akka.http.scaladsl.model.StatusCodes._
 import akka.http.scaladsl.server.Directives._
 import akka.http.scaladsl.server.StandardRoute
+import hmda.geo.shared.protocol.StatusJsonProtocol
 import org.slf4j.LoggerFactory
 import com.typesafe.scalalogging.Logger
 import spray.json._
-import hmda.geo.model.Status
-import hmda.geo.protocol.StatusJsonProtocol
+import hmda.geo.shared.model.Status
 
 trait StatusRoute extends BaseRoute with StatusJsonProtocol {
 
