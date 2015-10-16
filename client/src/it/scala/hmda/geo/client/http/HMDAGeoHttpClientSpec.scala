@@ -19,21 +19,21 @@ class HMDAGeoHttpClientSpec extends FlatSpec with MustMatchers {
   }
 
   "A requet to /tracts" must "find the correct tract by latitude,longitude" in {
-    val p = Point(-117, 38)
+    val p = Point(-93.2, 33.8)
     val maybeTract = Await.result(HMDAGeoHttpClient.findTractByPoint(p), 2.seconds)
     maybeTract match {
       case Right(t) =>
-        t.intptlon mustBe "-116.6775170"
-        t.awater mustBe 4386983
+        t.intptlon mustBe "-093.2684491"
+        t.awater mustBe 3132857
         t.mtfcc mustBe "G5020"
-        t.aland mustBe -2147483648
-        t.namelsad mustBe "Census Tract 9602"
-        t.tractce mustBe "960200"
-        t.statefp mustBe "32"
-        t.intptlat mustBe "+38.1235057"
+        t.aland mustBe 726760770
+        t.namelsad mustBe "Census Tract 901"
+        t.tractce mustBe "090100"
+        t.statefp mustBe "05"
+        t.intptlat mustBe "+33.6857159"
         t.funcstat mustBe "S"
-        t.countyfp mustBe "023"
-        t.geoid mustBe "32023960200"
+        t.countyfp mustBe "099"
+        t.geoid mustBe "05099090100"
       case Left(b) =>
         b.desc mustBe "503 Service Unavailable"
         fail("SERVICE_UNAVAILABLE")
