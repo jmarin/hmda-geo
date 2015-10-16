@@ -8,7 +8,6 @@ import scala.concurrent.duration._
 import geometry.Point
 import hmda.geo.shared.model.tcp.InputCensusGeography
 import org.scalatest.{MustMatchers, FlatSpec}
-import tcp.HMDAGeoTCPClient
 
 import scala.util.{Failure, Success}
 

@@ -1,4 +1,4 @@
-package tcp
+package hmda.geo.client.tcp
 
 import akka.actor.ActorSystem
 import scala.concurrent.duration._

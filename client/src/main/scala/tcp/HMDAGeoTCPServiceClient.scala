@@ -1,4 +1,4 @@
-package tcp
+package hmda.geo.client.tcp
 
 import akka.stream.scaladsl.{ Flow, Sink, Source, Tcp }
 import geometry.Point
