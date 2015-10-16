@@ -1,7 +1,5 @@
 package hmda.geo.model.census
 
-import com.vividsolutions.jts.geom.Geometry
-
 case class TractResult(
   statefp: String,
   countyfp: String,

@@ -23,4 +23,7 @@ trait TractService extends TractEntityTable {
     }
   }
 
+  def findGeoidByPoint(p: Point)(implicit ec: ExecutionContext): Future[String] =
+    findByPoint(p).map(t => t.geoid)
+
 }
