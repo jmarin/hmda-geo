@@ -1,8 +1,8 @@
 package hmda.geo.service
 
 import hmda.geo.model.census.TractEntityTable
-import hmda.geo.model.census.TractResult
 import geometry.Point
+import hmda.geo.shared.model.census.TractResult
 import slick.lifted.TableQuery
 import scala.concurrent.{ ExecutionContext, Future }
 import hmda.geo.pg.PostgisDriver.api._

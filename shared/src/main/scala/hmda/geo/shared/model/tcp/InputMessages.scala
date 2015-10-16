@@ -1,6 +1,4 @@
-package hmda.geo.model.tcp
-
-import geometry.Point
+package hmda.geo.shared.model.tcp
 
 object InputMessages {
 

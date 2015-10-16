@@ -6,8 +6,8 @@ import akka.http.scaladsl.server.Directives._
 import com.typesafe.scalalogging.Logger
 import geometry.Point
 import hmda.geo.http.routes.BaseRoute
-import hmda.geo.protocol.census.CensusJsonProtocol
 import hmda.geo.service.TractService
+import hmda.geo.shared.protocol.census.CensusJsonProtocol
 import org.slf4j.LoggerFactory
 
 trait TractRoute extends BaseRoute with CensusJsonProtocol {

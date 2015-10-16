@@ -1,10 +1,6 @@
-package hmda.geo.client.api.model.census
+package hmda.geo.shared.model.census
 
-object HMDAGeoTractResult {
-  def empty: HMDAGeoTractResult = HMDAGeoTractResult("", "", "", "", "", "", "", 0.0, 0.0, "", "")
-}
-
-case class HMDAGeoTractResult(
+case class TractResult(
   statefp: String,
   countyfp: String,
   tractce: String,
@@ -17,4 +13,10 @@ case class HMDAGeoTractResult(
   intptlat: String,
   intptlon: String
 )
+
+object TractResult {
+  def empty: TractResult = {
+    TractResult("", "", "", "", "", "", "", 0.0, 0.0, "", "")
+  }
+}
 

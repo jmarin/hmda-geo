@@ -6,16 +6,18 @@ import akka.stream.scaladsl._
 import akka.util.ByteString
 import com.typesafe.scalalogging.Logger
 import geometry.Point
-import hmda.geo.model.tcp.InputMessages.InputCensusGeography
-import hmda.geo.protocol.census.CensusJsonProtocol
+import hmda.geo.shared.model.tcp.InputMessages
+import InputMessages.InputCensusGeography
 import hmda.geo.service.TractService
+import hmda.geo.shared.protocol.census.CensusJsonProtocol
+import hmda.geo.shared.protocol.tcp.CensusTCPJsonProtocol
 import org.slf4j.LoggerFactory
 import spray.json._
 
 import scala.concurrent.{ ExecutionContextExecutor, Future }
 import spray.json._
 
-trait TcpService extends CensusJsonProtocol {
+trait TcpService extends CensusJsonProtocol with CensusTCPJsonProtocol {
 
   lazy val tcpLog = Logger(LoggerFactory.getLogger("hmda-geo-census-tract-tcp"))
 

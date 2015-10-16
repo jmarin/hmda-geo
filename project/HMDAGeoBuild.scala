@@ -34,7 +34,7 @@ object HMDAGeoBuild extends Build {
 
   lazy val hmdageo = (project in file("."))
     .settings(buildSettings: _*)
-    .aggregate(api, client)
+    .aggregate(api, client, shared)
 
   lazy val api = (project in file("api"))
     .configs( IntegrationTest )
