@@ -1,20 +1,21 @@
-package hmda.geo.client
+package http
 
 import akka.actor.ActorSystem
 import akka.http.scaladsl.Http
-import akka.stream.{ ActorMaterializer, StreamTcpException }
-import scala.concurrent.duration._
-import akka.util.Timeout
-import com.typesafe.config.Config
 import akka.http.scaladsl.model.HttpMethods._
 import akka.http.scaladsl.model.StatusCodes._
 import akka.http.scaladsl.model._
-import akka.stream.scaladsl.{ Sink, Source }
-import scala.concurrent.{ ExecutionContext, Future }
+import akka.stream.scaladsl.{Sink, Source}
+import akka.stream.{ActorMaterializer, StreamTcpException}
+import akka.util.Timeout
+import com.typesafe.config.Config
 import hmda.geo.client.model.ResponseError
 import hmda.geo.client.protocol.ClientJsonProtocol
 
-trait HMDAGeoServiceClient extends ClientJsonProtocol {
+import scala.concurrent.duration._
+import scala.concurrent.{ExecutionContext, Future}
+
+trait HMDAGeoHttpServiceClient extends ClientJsonProtocol {
 
   implicit val askTimeout: Timeout = 1000.millis
   implicit val system: ActorSystem = ActorSystem("hmda-geo-client")
