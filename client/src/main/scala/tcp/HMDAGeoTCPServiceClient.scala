@@ -24,6 +24,16 @@ trait HMDAGeoTCPServiceClient extends CensusTCPJsonProtocol {
 
   lazy val connection = Tcp().outgoingConnection(host, port)
 
+  def findGeoidByPoint2(): Flow[InputCensusGeography, String, Unit] = {
+    Flow[InputCensusGeography]
+      .map{ g =>
+        val json = g.toJson.toString()
+        val input = json.map(ByteString(_))
+        val source = Source(input)
+        input.map(_.utf8String).toString
+      }
+  }
+
   def findGeoidByPoint(g: InputCensusGeography): Source[String, Unit] = {
     val json = g.toJson.toString()
     val input = json.map(ByteString(_))
