@@ -11,6 +11,9 @@ import akka.util.{ ByteString, Timeout }
 import com.typesafe.config.Config
 import spray.json._
 
+import scala.concurrent.Future
+import scala.util.{ Failure, Success }
+
 trait HMDAGeoTCPServiceClient extends CensusTCPJsonProtocol {
 
   implicit val askTimeout: Timeout
@@ -24,16 +27,6 @@ trait HMDAGeoTCPServiceClient extends CensusTCPJsonProtocol {
 
   lazy val connection = Tcp().outgoingConnection(host, port)
 
-  def findGeoidByPoint2(): Flow[InputCensusGeography, String, Unit] = {
-    Flow[InputCensusGeography]
-      .map{ g =>
-        val json = g.toJson.toString()
-        val input = json.map(ByteString(_))
-        val source = Source(input)
-        input.map(_.utf8String).toString
-      }
-  }
-
   def findGeoidByPoint(g: InputCensusGeography): Source[String, Unit] = {
     val json = g.toJson.toString()
     val input = json.map(ByteString(_))
@@ -44,5 +37,4 @@ trait HMDAGeoTCPServiceClient extends CensusTCPJsonProtocol {
       .via(connection)
       .map(_.utf8String)
   }
-
 }

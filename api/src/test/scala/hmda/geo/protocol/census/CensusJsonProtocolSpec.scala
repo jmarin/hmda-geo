@@ -1,6 +1,7 @@
 package hmda.geo.protocol.census
 
 import hmda.geo.shared.model.census.TractResult
+import hmda.geo.shared.model.tcp.InputCensusGeography
 import hmda.geo.shared.protocol.census.CensusJsonProtocol
 import hmda.geo.shared.protocol.tcp.CensusTCPJsonProtocol
 import org.scalatest._
